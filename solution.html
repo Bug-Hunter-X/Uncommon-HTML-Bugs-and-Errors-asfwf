@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Corrected HTML</title>
+</head>
+<body>
+  <div id="myDiv">
+    This is some text.
+  </div>
+  <script>
+    // Accessing attributes safely
+    let x = document.getElementById("myDiv").getAttribute("id");
+    console.log(x); // Outputs "myDiv"
+    
+    // Using a valid selector
+    let y = document.getElementById("myDiv");
+    console.log(y); // Outputs the div element
+    
+    //Sanitizing innerHTML using TextEncoder and TextDecoder
+    let userInput = "<script>alert('XSS')</script>";
+    let encodedInput = new TextEncoder().encode(userInput);
+    let decodedInput = new TextDecoder().decode(encodedInput);
+    document.getElementById("myDiv").textContent = decodedInput;
+    
+    //Ensuring complete HTML
+    let completeHTML = "<p>This paragraph is complete</p>";
+    document.getElementById("myDiv").innerHTML += completeHTML;
+    
+    //Avoiding conflicting IDs
+    // Use unique IDs for each element
+  </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Uncommon HTML Bug</title>
+</head>
+<body>
+  <div id="myDiv">
+    This is some text.
+  </div>
+  <script>
+    // Attempting to access a non-existent attribute
+    let x = document.getElementById("myDiv").getAttribute("nonExistentAttr");
+    console.log(x); // Outputs null, but might cause unexpected behavior in some cases
+    
+    // Using an invalid selector
+    let y = document.querySelector("#myDiv.invalidClass");
+    console.log(y); // Outputs null 
+    
+    //Incorrect use of innerHTML with unsanitized data
+    let userInput = "<script>alert('XSS')</script>";
+    document.getElementById("myDiv").innerHTML = userInput;//Vulnerable to Cross Site Scripting (XSS) attacks.
+    
+    //Missing closing tags
+    let incompleteHTML = "<p>This paragraph is incomplete";
+    document.getElementById("myDiv").innerHTML += incompleteHTML;// may cause rendering issues
+
+    //Conflicting IDs
+    document.write("<div id='myDiv'>Conflicting ID</div>"); //Duplicate Id will overwrite the first one
+  </script>
+</body>
+</html>
